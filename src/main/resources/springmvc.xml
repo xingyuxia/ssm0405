@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+ xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/util https://www.springframework.org/schema/util/spring-util.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd">
+       <context:component-scan base-package="com.hy.web"></context:component-scan>
+       <mvc:annotation-driven/>
+       <mvc:default-servlet-handler/>
+       <!--配置模板解析器-->
+       <bean id="templateResolver" class="org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver">
+            <property name="characterEncoding" value="utf-8"></property>
+            <property name="suffix" value=".html"></property>
+            <!--是否缓存-->
+            <property name="cacheable" value="false"></property>
+            <property name="templateMode" value="HTML"></property>
+       </bean>
+       <!--配置模板引擎-->
+       <bean id="templateEngine" class="org.thymeleaf.spring4.SpringTemplateEngine">
+             <property name="templateResolver" ref="templateResolver"></property>
+       </bean>
+       <!--配置视图解析器-->
+       <bean id="thymeleafViewResolver" class="org.thymeleaf.spring4.view.ThymeleafViewResolver">
+              <property name="characterEncoding" value="utf-8"></property>
+              <property name="templateEngine" ref="templateEngine"></property>
+       </bean>
+</beans>
